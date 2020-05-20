@@ -15,6 +15,14 @@ import { NavigationActions, StackActions } from "react-navigation";
 import { connect } from "react-redux";
 const { height, width } = Dimensions.get("window");
 
+// We are importing the native Java module here
+import { NativeModules } from "react-native";
+var HelloWorld = NativeModules.HelloWorld;
+
+import ToastExample from '../ToastMessage.js';
+
+
+
 class LoginComponent extends React.Component {
   constructor(props) {
     super(props);
@@ -49,6 +57,19 @@ class LoginComponent extends React.Component {
     }
   }
 
+  // async function to call the Java native method
+  sayHiFromJava() {
+  //  ToastExample.show('Awesome', ToastExample.SHORT);
+   /* HelloWorld.sayHi(
+      (err) => {
+        console.log(err);
+      },
+      (msg) => {
+        console.log(msg);
+      }
+    );*/
+  }
+
   _toggleSwitch() {
     this.setState({
       switchValue: !this.state.switchValue,
@@ -81,6 +102,7 @@ class LoginComponent extends React.Component {
               style={styles.buttonStyle}
               color="#0966aa"
               onPress={() => this._loginPress()}
+              //onPress={() => this.sayHiFromJava()}
             >
               <Text style={{ color: "#fff" }}>{"Log in"}</Text>
             </TouchableOpacity>
